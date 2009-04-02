@@ -4,11 +4,6 @@ run "rm README"
 run "cp config/database.yml config/database.yml.example"
 run "rm public/favicon.ico"
 run "rm public/robots.txt"
-run "rm -f public/javascripts/*"
- 
-run "curl -L http://jqueryjs.googlecode.com/files/jquery-1.2.6.min.js > public/javascripts/jquery.js"
-run "curl -L http://jqueryjs.googlecode.com/svn/trunk/plugins/form/jquery.form.js > public/javascripts/jquery.form.js"
-
  
 file '.gitignore', <<-END
 .DS_Store
@@ -22,8 +17,8 @@ git :init
 git :add => "."
 git :commit => '-m "Initial commit."'
 
-plugin 'hoptoad_notifier', :git => "git://github.com/thoughtbot/hoptoad_notifier.git"
-plugin 'asset_packager', :git => 'http://synthesis.sbecker.net/pages/asset_packager'
+plugin 'asset_packager', :git => 'script/plugin install git://github.com/sbecker/asset_packager.git'
+plugin 'hoptoad_notifier', :git => 'git://github.com/thoughtbot/hoptoad_notifier.git'
 
 hoptoad_key = ask("What is your Hoptoad API key?")
 
@@ -54,6 +49,10 @@ end
 if yes?("Freeze Rails? (yes/no)")
   freeze!
 end
+
+run "rm -f public/javascripts/*"
+run "curl -L http://jqueryjs.googlecode.com/files/jquery-1.2.6.min.js > public/javascripts/jquery.js"
+run "curl -L http://jqueryjs.googlecode.com/svn/trunk/plugins/form/jquery.form.js > public/javascripts/jquery.form.js"
 
 generate('rspec')
 generate('cucumber')
@@ -184,11 +183,15 @@ route 'map.root :controller => "user_sessions", :action => "new"'
 route 'map.resource :account, :controller => "users"'
 route 'map.resources :users'
 
+git :add => "."
+git :commit => '-m "Adding templates, plugins and gems"'
+
 if yes?("Create and migrate databases now? (yes/no)")
   rake("db:create:all")
   rake("db:migrate")
 end
 
-git :add => "."
-git :commit => '-m "Adding templates, plugins and gems"'
-
+puts "TO-DO checklist:"
+puts "* Create views for Authlogic - see http://github.com/binarylogic/authlogic_example/tree/master/app/views for examples"
+puts "* Test your Hoptoad installation with: rake hoptoad:test"
+puts "* Generate your asset_packager config with: rake asset:packager:create_yml"
