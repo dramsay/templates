@@ -57,7 +57,7 @@ run "curl -L http://jqueryjs.googlecode.com/svn/trunk/plugins/form/jquery.form.j
 generate('rspec')
 generate('cucumber')
 generate('session', 'user_session')
-generate('rspec_scaffold', 'user login:string crypted_password:string password_salt:string persistence_token:string login_count:integer last_request_at:datetime last_login_at:datetime current_login_at:datetime last_login_ip:string current_login_ip:string')
+generate('model', 'User login:string crypted_password:string password_salt:string persistence_token:string login_count:integer last_request_at:datetime last_login_at:datetime current_login_at:datetime last_login_ip:string current_login_ip:string')
 
 file 'app/models/user.rb', <<-CODE
 class User < ActiveRecord::Base
@@ -191,7 +191,10 @@ if yes?("Create and migrate databases now? (yes/no)")
   rake("db:migrate")
 end
 
+puts "#" * 30
 puts "TO-DO checklist:"
-puts "* Create views for Authlogic - see http://github.com/binarylogic/authlogic_example/tree/master/app/views for examples"
-puts "* Test your Hoptoad installation with: rake hoptoad:test"
-puts "* Generate your asset_packager config with: rake asset:packager:create_yml"
+puts "\t* Write specs for the User model and controller"
+puts "\t* Create views for Authlogic - see http://github.com/binarylogic/authlogic_example/tree/master/app/views for examples"
+puts "\t* Test your Hoptoad installation with: rake hoptoad:test"
+puts "\t* Generate your asset_packager config with: rake asset:packager:create_yml"
+puts "#" * 30
