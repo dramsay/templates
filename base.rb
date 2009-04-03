@@ -189,6 +189,8 @@ git :commit => '-m "Adding templates, plugins and gems"'
 if yes?("Create and migrate databases now? (yes/no)")
   rake("db:create:all")
   rake("db:migrate")
+  git :add => "."
+  git :commit => '-m "First migration adding users"'
 end
 
 puts "#" * 30
