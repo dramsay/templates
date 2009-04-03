@@ -1,6 +1,6 @@
 = Templates
 
-I'm using this repository to store my Rails 2.3+ templates. 
+Starting a collection of Rails 2.3+ templates. 
 
 == Base
 
