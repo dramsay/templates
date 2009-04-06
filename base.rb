@@ -178,6 +178,12 @@ class ApplicationController < ActionController::Base
 end
 CODE
 
+file 'public/javascripts/application.js', <<-CODE
+  jQuery.ajaxSetup({ 
+      'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")} 
+  });
+CODE
+
 route 'map.resource :user_session'
 route 'map.root :controller => "user_sessions", :action => "new"'
 route 'map.resource :account, :controller => "users"'
