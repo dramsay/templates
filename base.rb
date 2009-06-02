@@ -17,7 +17,7 @@ git :init
 git :add => "."
 git :commit => '-m "Initial commit."'
 
-plugin 'asset_packager', :git => 'script/plugin install git://github.com/sbecker/asset_packager.git'
+plugin 'asset_packager', :git => 'git://github.com/sbecker/asset_packager.git'
 plugin 'hoptoad_notifier', :git => 'git://github.com/thoughtbot/hoptoad_notifier.git'
 
 hoptoad_key = ask("What is your Hoptoad API key?")
